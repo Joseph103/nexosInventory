@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+      <h3>Listado de Productos</h3>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <input type="text" [(ngModel)]="filterProduct" (keyup)="filterTable()" class="form-control" placeholder="Filtro">
+      </div>
+    </div>
+    <br>
+    <table class="table  table-dark table-sm">
+      <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidada</th>
+            <th>Nombre Usuario</th>
+            <th>Cargo Usuario</th>
+            <th>Edad Usuario</th>
+            <th>FE Usuario</th>
+            <th>Fecha de Entrada</th>
+            <th>Fecha de Modificacion</th>
+            <th>
+                <div class="btn-group d-grid gap-2" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary btn-sm" [routerLink]="['product-create']">NEW</button>
+                </div>
+            </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of listProducts">
+          <td>{{product.name}}</td>
+          <td>{{product.amount}}</td>
+          <td>{{product.userId.name}}</td>
+          <td>{{product.userId.idCargo.name}}</td>
+          <td>{{product.userId.age}}</td>
+          <td>{{product.userId.entryDate| date:'M/d/yy, h:mm a'}}</td>
+          <td>{{product.entryDate | date:'M/d/yy, h:mm a'}}</td>
+          <td>{{product.modificationDate| date:'M/d/yy, h:mm a'}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-sm" [routerLink]="['product-edit', product]" [state]=product>EDIT</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="deleteProduct(product)">DELETE</button>
+            </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
